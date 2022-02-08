@@ -1,1 +1,58 @@
-// TODO
+.container{
+  display:flex;
+  margin-left: 370px;
+  width: 23.125rem;
+  flex-direction: column;
+  color: white;
+
+  a{
+    text-decoration: none;
+
+    & + a{
+      margin-top: 3rem;
+    }
+  }
+
+  .title{
+    color: var(--title);
+    font-size: 1.75rem;
+    &:hover{
+      color: var(--pink);
+    }
+  }
+
+  p{
+    color: var(--text);
+    font-size: 1.125rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .info{
+    color: var(--info);
+    font-size: 0.875rem;
+
+    span{
+      align-self: center;
+      margin-left: 0.5rem;
+    }
+  }
+
+  div{
+    display:flex;
+    flex-direction: row;
+
+    & + div{
+      margin-left: 1.5rem;
+    }
+  }
+
+  button{
+    text-decoration: none;
+    color: var(--pink);
+    align-self: flex-start;
+    margin-top: 4rem;
+    border: 0;
+    font-weight: 500;
+    font-size:1.125rem;
+  }
+}

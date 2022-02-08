@@ -2,6 +2,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  background-color: var(--background-color);
 }
 
-// TODO
+:root{
+  --background-color: #1A1D23;
+  --title: #F8F8F8;
+  --text: #D7D7D7;
+  --info: #BBBBBB;
+  --pink: #FF57B2;
+}
