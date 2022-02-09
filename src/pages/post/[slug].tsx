@@ -68,7 +68,7 @@ export default function Post({
         <img
           className={styles.banner}
           src={post.data.banner.url}
-          alt="Post banner"
+          alt="Banner"
         />
         <article>
           <h1>{post.data.title}</h1>
@@ -115,29 +115,6 @@ export default function Post({
               </div>
             ))}
           </div>
-          <div className={styles.footer}>
-            <nav
-              className={styles.postNavigation}
-              style={{ flexDirection: previousPost ? 'row' : 'row-reverse' }}
-            >
-              {previousPost && (
-                <Link href={`/post/${previousPost.uid}`}>
-                  <a className={styles.postAnterior}>
-                    {previousPost.data.title}
-                    <span>Post anterior</span>
-                  </a>
-                </Link>
-              )}
-              {nextPost && (
-                <Link href={`/post/${nextPost.uid}`}>
-                  <a className={styles.postPosterior}>
-                    {nextPost.data.title}
-                    <span>Próximo post</span>
-                  </a>
-                </Link>
-              )}
-            </nav>
-          </div>
         </article>
       </main>
     </>
@@ -183,28 +160,6 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({
     };
   }
 
-  const previousResponse = await prismic.query(
-    [Prismic.predicates.at('document.type', 'posts')],
-    {
-      fetch: ['posts.title'],
-      after: response.id,
-      orderings: '[document.first_publication_date desc]',
-      pageSize: 1,
-      ref: previewData?.ref ?? null,
-    }
-  );
-
-  const nextResponse = await prismic.query(
-    [Prismic.predicates.at('document.type', 'posts')],
-    {
-      fetch: ['posts.title'],
-      after: response.id,
-      orderings: '[document.first_publication_date]',
-      pageSize: 1,
-      ref: previewData?.ref ?? null,
-    }
-  );
-
   return {
     props: {
       post: {
@@ -221,19 +176,6 @@ export const getStaticProps: GetStaticProps<PostProps> = async ({
           },
         },
       },
-      previousPost: previousResponse.results.length
-        ? {
-            uid: previousResponse.results[0].uid,
-            data: { title: previousResponse.results[0].data.title },
-          }
-        : null,
-      nextPost: nextResponse.results.length
-        ? {
-            uid: nextResponse.results[0].uid,
-            data: { title: nextResponse.results[0].data.title },
-          }
-        : null,
-      preview,
     },
     revalidate: 60 * 5, // 5min
   };
