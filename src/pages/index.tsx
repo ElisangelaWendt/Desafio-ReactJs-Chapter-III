@@ -130,7 +130,6 @@ export const getStaticProps: GetStaticProps<HomeProps> = async ({
       author: post.data.author,
     },
   }));
-  console.log(posts);
   return {
     props: {
       postsPagination: {

@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 import Prismic from '@prismicio/client';
 import { format } from 'date-fns';
@@ -38,19 +37,13 @@ interface PostProps {
   post: Post;
   previousPost?: Post;
   nextPost?: Post;
-  preview: boolean;
 }
 
 export default function Post({
   post,
   previousPost,
   nextPost,
-  preview,
 }: PostProps): JSX.Element {
-  const router = useRouter();
-  if (router.isFallback) {
-    return <span>Carregando...</span>;
-  }
   const wordsPerMinute = 200;
   const totalWords = Math.round(
     post.data.content.reduce(
