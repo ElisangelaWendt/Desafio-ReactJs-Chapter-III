@@ -9,9 +9,11 @@ import ptBR from 'date-fns/locale/pt-BR';
 import hash from 'object-hash';
 
 import { RichText } from 'prismic-dom';
+import { useRouter } from 'next/router';
 import { getPrismicClient } from '../../services/prismic';
 
 import styles from './post.module.scss';
+import Header from '../../components/Header';
 
 interface Post {
   first_publication_date?: string | null;
@@ -44,6 +46,10 @@ export default function Post({
   previousPost,
   nextPost,
 }: PostProps): JSX.Element {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <span>Carregando...</span>;
+  }
   const wordsPerMinute = 200;
   const totalWords = Math.round(
     post.data.content.reduce(
@@ -65,6 +71,7 @@ export default function Post({
         <title>{post.data.title} | Ignews</title>
       </Head>
       <main className={styles.container}>
+        <Header />
         <img
           className={styles.banner}
           src={post.data.banner.url}

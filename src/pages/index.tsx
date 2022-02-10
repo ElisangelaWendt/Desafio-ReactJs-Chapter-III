@@ -59,14 +59,13 @@ export default function Home({
     setNextPage(jsonResponse.next_page);
   }
 
-  console.log(posts);
   return (
     <>
       <Head>
         <title>Home | Space Travelling</title>
       </Head>
+      <Header />
       <main className={styles.container}>
-        <Header />
         {posts.map(post => (
           <Link href={`/post/${post.uid}`} key={post.uid}>
             <a className={styles.post} title={`Post: ${post.data.title}`}>

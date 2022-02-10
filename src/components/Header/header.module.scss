@@ -1,4 +1,9 @@
 .headerContainer{
   margin-top: 2.5rem;
   margin-bottom: 2.5rem;
+  margin-left: 23.125rem;
+
+  &:hover{
+    cursor: pointer;
+  }
 }
